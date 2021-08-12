@@ -1,0 +1,21 @@
+SW = SCREEN_WIDTH/2-264
+SH = SCREEN_HEIGHT/2-128
+
+DIALOG "Dovetail", sw, sh, 630, 452
+
+image 0,0,100,100,"dovetail.bmp"
+
+input 280,380, 50, 23, a !flat width
+input 280, 25, 50, 23, b !overall width
+input 535, 200, 50, 23, c !overall height
+input 25, 316, 50, 23, f !step up to shoulder
+
+input 210, 145, 75, 23, j ! extrude length
+input 320, 182, 75, 23, g ! flat size
+input 320, 219, 75, 23, l ! included angle
+
+CANCEL 535, 383, 77, 23
+OK 430, 383, 75, 23
+
+save_defaults
+load_defaults

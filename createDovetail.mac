@@ -1,0 +1,66 @@
+:showdialog
+dialog "createDovetail.dlg"
+
+
+icode = 0
+if l>89.99 then icode = 1
+if l<1 then icode = 1
+if j<0.01 then icode = 2
+if g<0 then icode = 3
+if f<.01 then icode = 4
+if c<f then icode = 5
+if b<a then icode = 6
+if icode>0 then goto error
+
+degrees
+
+! Inputs
+!a = flat to flat
+!b = overall width
+!c = overall height
+!f = step up
+!g = flat size
+!l = angle
+!j = extrude depth
+
+! used internally
+d = a/2
+e = tan(l)	
+
+
+
+k = (f-g) / e
+
+contour[
+start -d, 0 
+line -d,g
+line -d+k, f
+line -b/2, f
+line -b/2, c
+line b/2, c 
+line b/2, f 
+line d-k, f 
+line d,g
+line d, 0
+line -d, 0
+]
+
+outline = contourRef
+DESELECT_ALL_GEO
+!select_geo outline
+select_shape outline
+extrude j/2,-j/2
+delete_shape outline
+goto end
+
+
+:error
+if icode=1 then message "Angle input is wrong."
+if icode=2 then message "Length input is wrong."
+if icode=3 then message "Flat size is wrong."
+if icode=4 then message "Step size is wrong"
+if icode=5 then message "Height is less than step value"
+if icode=6 then message "Width is less than flat to flat width."
+goto showdialog
+
+:end
